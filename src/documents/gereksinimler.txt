@@ -1,0 +1,15 @@
+Proje ekibi ve platform seçimine ilişkin bilgiler:
+Proje ekibiniz 4-5 kişiden oluşabilir.
+Platform ve IDE seçimi serbesttir.
+Projenizde bulunması gereken özellikler:
+En az 5 farklı ön yüz (ekran) gerçekleme (20 puan)
+Hazırlanan ön yüzlerde derste işlenen layout ve UI elemanlarından en az 5’inin kullanımı (20 puan)
+Bildirim, harita, vb. gibi ileri özelliklerin kullanımı (20 puan)
+Bir servisten veri alarak ön yüzde görüntüleme (20 puan)
+Aşağıdaki 5 maddeden 2’sinin kullanımı (2x10 puan):
+Yerel cihazda veri depolama ve ekranlar arası veri aktarımı
+Medya oynatıcı kullanımı, versiyon kontrol kullanımı
+Gradle (podcast) üzerinden 3rd party kütüphane kullanımı
+Cihazın konum, takvim, rehber gibi özelliklerine erişim
+Makine öğrenmesi kütüphanelerinin kullanımı
+Proje sunumları dönemin son 3 haftasında yüz yüze yapılacaktır. Her hafta en fazla 10 grup sunum yapacak olup sunum süreleri maksimum 10-12 dakikadan oluşacaktır. Sunum yapmayanların projeleri rapor/video gibi görsel materyaller üzerinden değerlendirilecektir. Bu durumda, yukarıda belirtilen gereksinimlerin açıkça belirtilmesi gerekmektedir. Geliştirildiği halde belirtilmeyen gereksinimler puanlanmayacaktır. Bu sebeple, yüz yüze sunum yapmanız avantajınıza olacaktır. Bilginize...
