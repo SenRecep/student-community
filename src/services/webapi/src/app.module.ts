@@ -10,13 +10,23 @@ import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
     UsersModule,
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: '1943332733Rec',
+    //   database: 'student_community_db',
+    //   entities,
+    //   synchronize: true,
+    // }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
+      host: 'containers-us-west-40.railway.app',
+      port: 6354,
       username: 'root',
-      password: '1943332733Rec',
-      database: 'student_community_db',
+      password: 'Q0aHooQov6GtkyR8Urtc',
+      database: 'railway',
       entities,
       synchronize: true,
     }),
