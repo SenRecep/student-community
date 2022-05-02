@@ -1,16 +1,33 @@
-import { Controller, Get, Post, Req, Session, UseGuards } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  Inject,
+  Post,
+  Req,
+  Session,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Request } from 'express';
 import {
   LocalGuard,
   AuthanticatedGuard,
-} from 'src/modules/auth/utils/LocalGuard';
+} from 'src/modules/auth/guards/Local.guard';
+import { UserListDto } from 'src/modules/users/dto/UserList.dto';
+import { Public } from '../../guards/Public.guard';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Controller('auth')
 export class AuthController {
+  constructor(
+    @Inject('AuthService') private readonly authService: AuthService,
+  ) {}
+  @Public()
   @UseGuards(LocalGuard)
   @Post('login')
-  async login() {
-    console.log('login');
+  async login(@Req() req: Request) {
+    return this.authService.login(req.user);
   }
 
   @Get('')
@@ -19,9 +36,10 @@ export class AuthController {
     return session;
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthanticatedGuard)
   @Get('status')
   getAuthStatus(@Req() req: Request) {
-    return req.user;
+    return new UserListDto(req.user);
   }
 }

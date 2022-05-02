@@ -9,10 +9,14 @@ import {
   ParseIntPipe,
   Post,
   UseFilters,
+  UseGuards,
   UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/modules/auth/guards/JwtAuth.guard';
+import { LocalGuard } from 'src/modules/auth/guards/Local.guard';
+import { Public } from 'src/modules/auth/guards/Public.guard';
 import { CreateUserDto } from '../../dto/CreateUser.dto';
 import { HttpExceptionFilter } from '../../filters/HttpException.filter';
 import { UsersService } from '../../services/users/users.service';
@@ -37,6 +41,17 @@ export class UsersController {
     if (!user) throw new NotFoundException();
     return user;
   }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseFilters(HttpExceptionFilter)
+  @Get('name/:name')
+  getUserByName(@Param('name') name: string) {
+    const user = this.userService.findByName(name);
+    if (!user) throw new NotFoundException();
+    return user;
+  }
+
+  @Public()
   @Post('create')
   @UsePipes(ValidationPipe)
   createUser(@Body() createUserDto: CreateUserDto) {

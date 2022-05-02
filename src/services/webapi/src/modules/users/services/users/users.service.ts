@@ -4,6 +4,7 @@ import { User } from 'src/typeorm';
 import { encodePassword } from 'src/utils/bcrypt';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../../dto/CreateUser.dto';
+import { UserListDto } from '../../dto/UserList.dto';
 
 @Injectable()
 export class UsersService {
@@ -11,18 +12,21 @@ export class UsersService {
     @InjectRepository(User)
     private readonly repository: Repository<User>,
   ) {}
-  getUsers() {
-    return this.repository.find();
+  async getUsers() {
+    const data = await this.repository.find();
+    return data.map((user) => new UserListDto(user));
   }
   createUser(createUserDto: CreateUserDto) {
     const password = encodePassword(createUserDto.password);
     const user = this.repository.create({ ...createUserDto, password });
     return this.repository.save(user);
   }
-  findByName(name: string) {
-    return this.repository.findOne({ where: { name } });
+  async findByName(name: string) {
+    const data = await this.repository.findOne({ where: { name } });
+    return new UserListDto(data);
   }
-  findById(id: number) {
-    return this.repository.findOne({ where: { id } });
+  async findById(id: number) {
+    const data = await this.repository.findOne({ where: { id } });
+    return new UserListDto(data);
   }
 }
