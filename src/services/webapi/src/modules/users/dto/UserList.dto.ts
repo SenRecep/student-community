@@ -2,7 +2,9 @@ import { Exclude } from 'class-transformer';
 
 export class UserListDto {
   id: number;
-  name: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   @Exclude()
   password: string;

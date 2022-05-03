@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { config } from 'src/config';
 import { User } from 'src/typeorm';
 import { UsersService } from '../users/services/users/users.service';
-import { JwtConstants } from './constants';
 import { AuthController } from './controllers/auth/auth.controller';
 import { AuthService } from './services/auth/auth.service';
 import { JwtStrategy } from './strategies/Jwt.strategy';
@@ -14,8 +14,8 @@ import { SessionSerializer } from './utils/SessionSerializer';
   imports: [
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
-      secret: JwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      secret: config().JWT.SECRET,
+      signOptions: { expiresIn: config().JWT.EXPIRES_IN },
     }),
   ],
   controllers: [AuthController],

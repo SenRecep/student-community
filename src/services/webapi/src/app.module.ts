@@ -6,10 +6,16 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/guards/JwtAuth.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { ConfigModule } from '@nestjs/config';
+import { config } from './config';
 
 @Module({
   imports: [
     UsersModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config],
+    }),
     // TypeOrmModule.forRoot({
     //   type: 'mysql',
     //   host: 'localhost',
@@ -22,11 +28,11 @@ import { APP_GUARD } from '@nestjs/core';
     // }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'containers-us-west-40.railway.app',
-      port: 6354,
-      username: 'root',
-      password: 'Q0aHooQov6GtkyR8Urtc',
-      database: 'railway',
+      host: config().DB.HOST,
+      port: config().DB.PORT,
+      username: config().DB.USER,
+      password: config().DB.PASSWORD,
+      database: config().DB.DATABASE,
       entities,
       synchronize: true,
     }),

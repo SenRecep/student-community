@@ -21,8 +21,8 @@ export class UsersService {
     const user = this.repository.create({ ...createUserDto, password });
     return this.repository.save(user);
   }
-  async findByName(name: string) {
-    const data = await this.repository.findOne({ where: { name } });
+  async findByUserName(userName: string) {
+    const data = await this.repository.findOne({ where: { userName } });
     return new UserListDto(data);
   }
   async findById(id: number) {
