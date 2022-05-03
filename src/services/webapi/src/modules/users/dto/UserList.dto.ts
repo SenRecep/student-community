@@ -2,7 +2,6 @@ import { Exclude } from 'class-transformer';
 
 export class UserListDto {
   id: number;
-  userName: string;
   firstName: string;
   lastName: string;
   email: string;

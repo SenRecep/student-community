@@ -41,9 +41,9 @@ export class UsersController {
 
   @UseInterceptors(ClassSerializerInterceptor)
   @UseFilters(HttpExceptionFilter)
-  @Get('username/:username')
-  async getUserByName(@Param('username') username: string) {
-    const user = await this.userService.findByUserName(username);
+  @Get()
+  async getUserByName(@Param('email') email: string) {
+    const user = await this.userService.findByUserEmail(email);
     if (!user) throw new NotFoundException();
     return user;
   }

@@ -9,8 +9,8 @@ import retrofit2.http.POST
 
 interface RetrofitTokenService {
     @FormUrlEncoded
-    @POST("auth/introspect")
+    @POST("api/auth/verify")
     suspend fun checkToken(
-        @Field("token") token: String, @Header("Authorization") authorization: String
+        @Field("access_token") token: String
     ): Response<Introspec>
 }

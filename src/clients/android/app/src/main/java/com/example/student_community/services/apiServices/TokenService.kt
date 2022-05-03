@@ -3,9 +3,9 @@ package com.example.student_community.services.apiServices
 import android.content.Context
 import com.example.student_community.consts.ApiConsts
 import com.example.student_community.models.api.ApiResponse
+import com.example.student_community.models.user.Introspec
 import com.example.student_community.models.user.JwtToken
 import com.example.student_community.services.retrofitServices.ApiClient
-import com.example.student_community.services.retrofitServices.RetrofitAuthService
 import com.example.student_community.services.retrofitServices.RetrofitTokenService
 import com.example.student_community.utility.GlobalApp
 import com.google.gson.Gson
@@ -19,10 +19,10 @@ class TokenService {
             var tokenString: String? =
                 preference.getString("token",null) ?: return ApiResponse(false);
             var token :JwtToken=Gson().fromJson(tokenString,JwtToken::class.java);
-            var authorization: String =
-                okhttp3.Credentials.basic("resource_webapi", "apisecret")
-            var response= retrofitService.checkToken(token.AccessToken,authorization);
-            return  ApiResponse(true);
+            var response= retrofitService.checkToken(token.AccessToken);
+            if (!response.isSuccessful) return  ApiResponse(false);
+            var introspec = response.body() as Introspec;
+            return  ApiResponse(introspec.Active);
         }
     }
 }

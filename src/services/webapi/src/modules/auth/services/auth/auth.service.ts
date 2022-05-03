@@ -11,15 +11,15 @@ export class AuthService {
     @Inject(JwtService) private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, password: string) {
-    const userDb = await this.usersService.findByUserName(username);
+  async validateUser(email: string, password: string) {
+    const userDb = await this.usersService.findByUserEmail(email);
     if (!userDb) return null;
     const matched = comparePassword(password, userDb.password);
     if (!matched) return null;
     return userDb;
   }
   async login(user: any) {
-    const payload = { username: user.userName, sub: user.id };
+    const payload = { email: user.email, sub: user.id };
     return new JwtToken(this.jwtService.sign(payload));
   }
   verify(jwtToken: JwtToken): boolean {
