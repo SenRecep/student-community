@@ -23,10 +23,12 @@ export class UsersService {
   }
   async findByUserName(userName: string) {
     const data = await this.repository.findOne({ where: { userName } });
+    if (!data) return null;
     return new UserListDto(data);
   }
   async findById(id: number) {
     const data = await this.repository.findOne({ where: { id } });
+    if (!data) return null;
     return new UserListDto(data);
   }
 }
