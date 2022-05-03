@@ -8,14 +8,13 @@ import com.example.student_community.models.user.UserSignUp
 import com.example.student_community.services.retrofitServices.ApiClient
 import com.example.student_community.services.retrofitServices.RetrofitAuthService
 import com.example.student_community.utility.HelperService
-import okhttp3.internal.Util
 
 class AuthService {
     companion object {
         private var retrofitService =
             ApiClient.buildService(ApiConsts.webApiBaseUrl, RetrofitAuthService::class.java, false);
 
-        suspend fun signUp(userSignUp: UserSignUp): ApiResponse<Util> {
+        suspend fun signUp(userSignUp: UserSignUp): ApiResponse<Unit> {
             try {
                 var response = retrofitService.signUp(userSignUp);
                 if (!response.isSuccessful) return HelperService.handleApiError(response);
@@ -25,7 +24,7 @@ class AuthService {
             }
         }
 
-        suspend fun signIn(userSignIn: UserSignIn): ApiResponse<Util> {
+        suspend fun signIn(userSignIn: UserSignIn): ApiResponse<Unit> {
             try {
                 var response = retrofitService.signIn(userSignIn);
                 if (!response.isSuccessful) return HelperService.handleApiError(response);
