@@ -7,10 +7,10 @@ import kotlin.collections.ArrayList
 
 val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
 data class ApiError(
-    @SerializedName("statusCode") var StatusCode: Number,
-    @SerializedName("timestamp") var Timestamp: String? = sdf.format(Date()),
-    @SerializedName("path") var Path:String?=null,
+    @SerializedName("statusCode") var StatusCode: Number?=500,
     @SerializedName("message") var Message:ArrayList<String>?=null,
     @SerializedName("error") var Error:String?=null,
-
+    @SerializedName("isShow") var IsShow:Boolean?=false,
+    @SerializedName("path") var Path:String?=null,
+    @SerializedName("timestamp") var Timestamp: String? = sdf.format(Date()),
 )

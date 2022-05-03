@@ -10,4 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="ex_offline_exception">İnternet bağlantınızı kontrol ediniz</string>
+    <string name="ex_common_error">Bir sorun meydana geldi lütfen daha sonra tekrar deneyiniz</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.example.student_community.utility
 
 import android.content.Context
+import com.example.student_community.R
+import com.example.student_community.exceptions.OfflineException
 import com.example.student_community.models.api.ApiError
 import com.example.student_community.models.api.ApiResponse
 import com.example.student_community.models.user.JwtToken
@@ -24,6 +26,17 @@ class HelperService {
                 apiError = Gson().fromJson(errorBody, ApiError::class.java);
             }
             return ApiResponse(false, null, apiError);
+        }
+
+        fun <T> handleException(ex: Exception): ApiResponse<T> {
+            val resources = GlobalApp.getAppContext().resources;
+            var errorMessage:ArrayList<String> = if (ex is OfflineException)
+                arrayListOf(resources.getString(R.string.ex_offline_exception));
+            else
+                arrayListOf(resources.getString(R.string.ex_common_error));
+            var error =
+                ApiError(StatusCode = 500, Message = errorMessage, IsShow = true);
+            return ApiResponse(false, error = error);
         }
     }
 }

@@ -16,18 +16,26 @@ class AuthService {
             ApiClient.buildService(ApiConsts.webApiBaseUrl, RetrofitAuthService::class.java, false);
 
         suspend fun signUp(userSignUp: UserSignUp): ApiResponse<Util> {
-            var response = retrofitService.signUp(userSignUp);
-            if (!response.isSuccessful) return HelperService.handleApiError(response);
-            return ApiResponse(true);
+            try {
+                var response = retrofitService.signUp(userSignUp);
+                if (!response.isSuccessful) return HelperService.handleApiError(response);
+                return ApiResponse(true);
+            } catch (ex: Exception) {
+                return HelperService.handleException(ex);
+            }
         }
 
         suspend fun signIn(userSignIn: UserSignIn): ApiResponse<Util> {
-            var response = retrofitService.signIn(userSignIn);
-            if (!response.isSuccessful) return HelperService.handleApiError(response);
+            try {
+                var response = retrofitService.signIn(userSignIn);
+                if (!response.isSuccessful) return HelperService.handleApiError(response);
 
-            var token = response.body() as JwtToken;
-            HelperService.saveTokenSharedPreference(token);
-            return ApiResponse(true);
+                var token = response.body() as JwtToken;
+                HelperService.saveTokenSharedPreference(token);
+                return ApiResponse(true);
+            } catch (ex: Exception) {
+                return HelperService.handleException(ex);
+            }
         }
 
     }
