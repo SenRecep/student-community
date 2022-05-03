@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 @Entity({ name: 'users' })
+@Unique(['email'])
 export class User {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
   id: number;
@@ -8,7 +9,7 @@ export class User {
   firstName: string;
   @Column({ name: 'last_name', nullable: false, default: '' })
   lastName: string;
-  @Column({ name: 'email', nullable: false, default: '' })
+  @Column({ name: 'email', nullable: false, default: '', unique: true })
   email: string;
   @Column({ name: 'password', nullable: false, default: '' })
   password: string;

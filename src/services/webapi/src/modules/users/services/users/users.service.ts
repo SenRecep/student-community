@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeorm';
 import { encodePassword } from 'src/utils/bcrypt';
@@ -17,6 +17,8 @@ export class UsersService {
     return data.map((user) => new UserListDto(user));
   }
   createUser(createUserDto: CreateUserDto) {
+    const isExist = this.findByUserEmail(createUserDto.email);
+    if (isExist) return new BadRequestException('Email already exist');
     const password = encodePassword(createUserDto.password);
     const user = this.repository.create({ ...createUserDto, password });
     return this.repository.save(user);

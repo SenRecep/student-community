@@ -15,7 +15,7 @@ class TokenService {
         private var retrofitService =
             ApiClient.buildService(ApiConsts.webApiBaseUrl, RetrofitTokenService::class.java, true);
         suspend fun checkToken():ApiResponse<Unit>{
-            var preference= GlobalApp.getAppContext().getSharedPreferences("apiToken", Context.MODE_PRIVATE);
+            var preference= GlobalApp.getAppContext().getSharedPreferences("api_token", Context.MODE_PRIVATE);
             var tokenString: String? =
                 preference.getString("token",null) ?: return ApiResponse(false);
             var token :JwtToken=Gson().fromJson(tokenString,JwtToken::class.java);
