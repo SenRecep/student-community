@@ -1,4 +1,5 @@
 import {
+  Body,
   ClassSerializerInterceptor,
   Controller,
   Get,
@@ -17,6 +18,8 @@ import {
 import { UserListDto } from 'src/modules/users/dto/UserList.dto';
 import { Public } from '../../guards/Public.guard';
 import { AuthService } from '../../services/auth/auth.service';
+import { Introspec } from '../../types/Introspec';
+import { JwtToken } from '../../types/JwtToken';
 
 @Controller('auth')
 export class AuthController {
@@ -28,6 +31,12 @@ export class AuthController {
   @Post('login')
   async login(@Req() req: Request) {
     return this.authService.login(req.user);
+  }
+  @Public()
+  @Post('verify')
+  verify(@Body() jwtToken: JwtToken) {
+    const value = this.authService.verify(jwtToken);
+    return new Introspec(value);
   }
 
   @Get('')

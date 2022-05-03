@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/modules/users/services/users/users.service';
 import { comparePassword } from 'src/utils/bcrypt';
+import { JwtToken } from '../../types/JwtToken';
 
 @Injectable()
 export class AuthService {
@@ -19,8 +20,14 @@ export class AuthService {
   }
   async login(user: any) {
     const payload = { username: user.userName, sub: user.id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    return new JwtToken(this.jwtService.sign(payload));
+  }
+  verify(jwtToken: JwtToken): boolean {
+    try {
+      this.jwtService.verify(jwtToken.access_token);
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 }
