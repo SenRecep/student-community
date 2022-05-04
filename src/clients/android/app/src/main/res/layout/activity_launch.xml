@@ -7,7 +7,7 @@
     tools:context=".ui.launch.LaunchActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_launch_icon"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"

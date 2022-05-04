@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/PROJECTS/student-community/src/clients/android/app/src/main/res/drawable/user_icon.xml" value="0.1" />
         <entry key="..\:/PROJECTS/student-community/src/clients/android/app/src/main/res/layout/activity_auth.xml" value="0.19746376811594202" />
         <entry key="..\:/PROJECTS/student-community/src/clients/android/app/src/main/res/layout/activity_launch.xml" value="0.19746376811594202" />
         <entry key="..\:/PROJECTS/student-community/src/clients/android/app/src/main/res/layout/content_main.xml" value="0.17074275362318841" />
