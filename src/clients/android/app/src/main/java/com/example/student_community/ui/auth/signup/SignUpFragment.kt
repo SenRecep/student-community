@@ -1,5 +1,6 @@
 package com.example.student_community.ui.auth.signup
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +10,13 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.student_community.R
 import com.example.student_community.models.user.UserSignUp
+import com.example.student_community.utility.HelperService
 import com.example.student_community.utility.LoadingState
 import kotlinx.android.synthetic.main.sign_up_fragment.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment() {
 
@@ -29,6 +35,10 @@ class SignUpFragment : Fragment() {
         var viewPager = requireActivity().findViewById<ViewPager2>(R.id.login_viewpager)
 
 
+        viewModel.errorState.observe(viewLifecycleOwner) {
+            HelperService.showErrorMessageByToast(it)
+        }
+
         viewModel.loadingState.observe(viewLifecycleOwner) {
             when (it) {
                 LoadingState.Loading -> fragmentView.signup_button_kayit.text = "Loading"
@@ -44,10 +54,22 @@ class SignUpFragment : Fragment() {
                 Password = fragmentView.signup_text_password.editText?.text.toString(),
             )
             viewModel.signUp(userSignUp).observe(viewLifecycleOwner) {
+                viewPager.currentItem = 0
                 if (it)
-                    viewPager.currentItem = 0
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(1000)
+                        onAlertDialog(fragmentView)
+                    }
+
             }
         }
         return fragmentView
+    }
+
+    private fun onAlertDialog(view: View) {
+        var builder = AlertDialog.Builder(view.context)
+        builder.setMessage("Kullanıcı kayıt işlemi tamamlandı, giriş yapabilirsiniz!")
+        builder.setPositiveButton("Tamam") { _, _ -> }
+        builder.show()
     }
 }

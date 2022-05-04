@@ -1,6 +1,7 @@
 package com.example.student_community.utility
 
 import android.content.Context
+import android.widget.Toast
 import com.example.student_community.R
 import com.example.student_community.exceptions.OfflineException
 import com.example.student_community.models.api.ApiError
@@ -30,13 +31,28 @@ class HelperService {
 
         fun <T> handleException(ex: Exception): ApiResponse<T> {
             val resources = GlobalApp.getAppContext().resources;
-            var errorMessage:ArrayList<String> = if (ex is OfflineException)
+            var errorMessage: ArrayList<String> = if (ex is OfflineException)
                 arrayListOf(resources.getString(R.string.ex_offline_exception));
             else
                 arrayListOf(resources.getString(R.string.ex_common_error));
             var error =
                 ApiError(StatusCode = 500, Message = errorMessage, IsShow = true);
             return ApiResponse(false, error = error);
+        }
+
+        fun showErrorMessageByToast(apiError: ApiError?) {
+            if (apiError == null) return;
+            var errorBuilder = StringBuilder()
+            if (apiError.IsShow != null && apiError.IsShow!! && apiError.Message != null)
+                for (error in apiError.Message!!)
+                    errorBuilder.append("$error\n")
+            if (apiError.Error != null)
+                errorBuilder.append("${apiError.Error!!}\n")
+
+            if (errorBuilder.isEmpty())
+                errorBuilder.append("Bir hata meydana geldi lütfen daha sonra tekrar deneyiniz")
+            Toast.makeText(GlobalApp.getAppContext(), errorBuilder.toString(), Toast.LENGTH_LONG)
+                .show()
         }
     }
 }
