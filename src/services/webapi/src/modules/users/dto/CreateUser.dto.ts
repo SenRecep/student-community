@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, MinLength, Validate } from 'class-validator';
+import { IsAcademicEmail } from 'src/extensions/CustomValidation/IsAcademicEmailValidator';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -12,5 +13,6 @@ export class CreateUserDto {
   password: string;
   @IsNotEmpty()
   @IsEmail()
+  @Validate(IsAcademicEmail)
   email: string;
 }

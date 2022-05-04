@@ -20,7 +20,8 @@ export class AuthService {
   }
   async login(user: any) {
     const payload = { email: user.email, sub: user.id };
-    return new JwtToken(this.jwtService.sign(payload));
+    const token = this.jwtService.sign(payload);
+    return new JwtToken(token);
   }
   verify(jwtToken: JwtToken): boolean {
     try {
