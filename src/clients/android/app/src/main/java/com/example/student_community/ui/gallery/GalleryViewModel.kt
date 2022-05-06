@@ -8,4 +8,6 @@ class GalleryViewModel : ViewModel() {
 
     var latitude: MutableLiveData<String> = MutableLiveData()
     var longitude: MutableLiveData<String> = MutableLiveData()
+    var address: MutableLiveData<String> = MutableLiveData()
+    var fark: MutableLiveData<String> = MutableLiveData()
 }

@@ -13,9 +13,9 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { HttpExceptionFilter } from 'src/filters/HttpException.filter';
 import { Public } from 'src/modules/auth/guards/Public.guard';
 import { CreateUserDto } from '../../dto/CreateUser.dto';
-import { HttpExceptionFilter } from '../../filters/HttpException.filter';
 import { UsersService } from '../../services/users/users.service';
 
 @Controller('users')

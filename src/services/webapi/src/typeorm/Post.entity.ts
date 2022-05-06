@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Address } from './Address.entity';
 
 @Entity({ name: 'posts' })
 export class Post {
@@ -8,4 +15,7 @@ export class Post {
   title: string;
   @Column({ name: 'content', nullable: false, default: '' })
   content: string;
+  @OneToOne(() => Address)
+  @JoinColumn()
+  address: Address;
 }

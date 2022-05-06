@@ -21,7 +21,7 @@ export class UsersService {
     if (isExist) throw new BadRequestException('Email already exist');
     const password = encodePassword(createUserDto.password);
     const user = this.repository.create({ ...createUserDto, password });
-    return this.repository.save(user);
+    return await this.repository.save(user);
   }
   async findByUserEmail(email: string) {
     const data = await this.repository.findOne({ where: { email } });

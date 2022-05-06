@@ -8,6 +8,7 @@ import { JwtAuthGuard } from './modules/auth/guards/JwtAuth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { config } from './config';
+import { PostsModule } from './modules/posts/posts.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { config } from './config';
     }),
     AuthModule,
     PassportModule.register({ session: true }),
+    PostsModule,
   ],
   controllers: [],
   providers: [
