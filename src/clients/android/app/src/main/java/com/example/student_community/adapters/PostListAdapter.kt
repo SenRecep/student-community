@@ -44,11 +44,11 @@ class PostListAdapter(var posts: ArrayList<Post>, private val itemClick: (Post) 
     fun addLoading(){
         var loadingPost=Post.createEmptyPost()
         posts.add(loadingPost)
-        notifyItemInserted(posts.size-1)
+        notifyDataSetChanged()
     }
     fun  removeLoading(){
         posts.removeAt(posts.size-1)
-        notifyItemRemoved(posts.size)
+        notifyDataSetChanged()
     }
 
     fun addPosts(products:ArrayList<Post>) {

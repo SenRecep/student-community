@@ -2,6 +2,7 @@ package com.example.student_community
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -11,18 +12,44 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import com.example.student_community.databinding.ActivityMainBinding
+import com.example.student_community.utility.HelperService
+import com.example.student_community.utility.IViewModelState
+import com.example.student_community.utility.LoadingState
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    companion object {
+        lateinit var loadingView: View
+        fun setLoadingStatus(viewModel: IViewModelState, viewLifecycleOwner: LifecycleOwner) {
+            viewModel.loadingState.observe(viewLifecycleOwner) {
+                when (it) {
+                    LoadingState.Loading -> loadingView.visibility = View.VISIBLE
+                    LoadingState.Loaded -> loadingView.visibility = View.GONE
+                }
+            }
+
+        }
+
+        fun setErrorStatus(viewModel: IViewModelState, viewLifecycleOwner: LifecycleOwner) {
+            viewModel.errorState.observe(viewLifecycleOwner) {
+                HelperService.showErrorMessageByToast(it)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        loadingView = full_page_loading_view
 
         setSupportActionBar(binding.appBarMain.toolbar)
 

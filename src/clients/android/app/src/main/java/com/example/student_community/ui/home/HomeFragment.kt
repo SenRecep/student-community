@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.student_community.MainActivity
 import com.example.student_community.adapters.PostListAdapter
 import com.example.student_community.databinding.FragmentHomeBinding
 import com.example.student_community.models.api.Pager
@@ -51,9 +52,8 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
 
-        viewModel.errorState.observe(viewLifecycleOwner) {
-            HelperService.showErrorMessageByToast(it)
-        }
+        MainActivity.setLoadingStatus(viewModel, viewLifecycleOwner)
+        MainActivity.setErrorStatus(viewModel, viewLifecycleOwner)
 
         linearLayoutManager = LinearLayoutManager(GlobalApp.getAppContext())
         root.rv.layoutManager = linearLayoutManager
