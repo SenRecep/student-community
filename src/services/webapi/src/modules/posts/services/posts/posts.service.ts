@@ -28,6 +28,15 @@ export class PostsService {
       relations: ['address'],
     });
   }
+  async getAllPager(take = 5, skip = 0): Promise<Post[]> {
+    const [data] = await this.postsRepository.findAndCount({
+      take,
+      skip,
+      relations: ['address'],
+      where: { isDeleted: false },
+    });
+    return data;
+  }
 
   async deleteAsync(id: number): Promise<Post> {
     const found = await this.getByIdAsync(id);

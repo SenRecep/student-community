@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UseFilters,
   UsePipes,
   ValidationPipe,
@@ -27,6 +28,10 @@ export class PostsController {
   @Get()
   getAll() {
     return this.postsService.getAllWhitoutDeleted();
+  }
+  @Get('pager')
+  getAllPager(@Query() { take, skip }) {
+    return this.postsService.getAllPager(take, skip);
   }
 
   @Get(':id')
