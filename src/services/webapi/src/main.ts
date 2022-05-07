@@ -7,6 +7,7 @@ import { getRepository } from 'typeorm';
 import { SessionEntity } from './typeorm';
 import { ConfigService } from '@nestjs/config';
 import { EnviormentKeys } from './constants/EnviormentKeys';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
@@ -30,6 +31,15 @@ const bootstrap = async () => {
   );
   app.use(passport.initialize());
   app.use(passport.session());
+  const config = new DocumentBuilder()
+    .setTitle('Student Community')
+    .setDescription('Student Community API')
+    .setVersion('1.0')
+    .addTag('Posts')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
   await app.listen(port);
 };
 

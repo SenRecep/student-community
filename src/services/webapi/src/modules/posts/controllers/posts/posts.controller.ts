@@ -1,18 +1,21 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   NotFoundException,
   Param,
   ParseIntPipe,
   Post,
+  Put,
   UseFilters,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filters/HttpException.filter';
 import { PostCreateDto } from '../../dto/PostCreate.dto';
+import { PostUpdateDto } from '../../dto/PostUpdate.dto';
 import { PostsService } from '../../services/posts/posts.service';
 
 @Controller('posts')
@@ -23,7 +26,7 @@ export class PostsController {
 
   @Get()
   getAll() {
-    return this.postsService.getAllAsync();
+    return this.postsService.getAllWhitoutDeleted();
   }
 
   @Get(':id')
@@ -32,6 +35,18 @@ export class PostsController {
     const found = await this.postsService.getByIdAsync(id);
     if (!found) throw new NotFoundException('Post not found');
     return found;
+  }
+
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.postsService.deleteAsync(id);
+  }
+  @Put(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() postUpdateDto: PostUpdateDto,
+  ) {
+    return this.postsService.updateAsync(id, postUpdateDto);
   }
 
   @Post()

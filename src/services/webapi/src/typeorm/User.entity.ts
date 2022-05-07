@@ -1,10 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, Entity, Unique } from 'typeorm';
+import { EntityBase } from './EntityBase.entity';
 
 @Entity({ name: 'users' })
 @Unique(['email'])
-export class User {
-  @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
-  id: number;
+export class User extends EntityBase {
   @Column({ name: 'first_name', nullable: false, default: '' })
   firstName: string;
   @Column({ name: 'last_name', nullable: false, default: '' })
