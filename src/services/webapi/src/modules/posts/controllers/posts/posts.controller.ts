@@ -30,8 +30,12 @@ export class PostsController {
     return this.postsService.getAllWhitoutDeleted();
   }
   @Get('pager')
-  getAllPager(@Query() { take, skip }) {
-    return this.postsService.getAllPager(take, skip);
+  async getAllPager(@Query() { take, skip }) {
+    const data = await this.postsService.getAllPager(take, skip);
+    console.log('take: ', take);
+    console.log('skip: ', skip);
+    console.log('data count: ', data.length);
+    return data;
   }
 
   @Get(':id')
