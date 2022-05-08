@@ -5,6 +5,7 @@
     android:background="#CCFAF9F9"
     android:clickable="true"
     android:elevation="1000dp"
+    android:focusable="auto"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -21,5 +22,5 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Loading..."
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 </LinearLayout>
