@@ -14,7 +14,7 @@ interface RetrofitPostsService {
     suspend fun getPostById(@Path("id") id:Int): Response<Post>
 
     @GET("api/posts/checkowner/{id}")
-    suspend fun getCheckOwner(@Path("id") id:Int): Response<Post>
+    suspend fun getCheckOwner(@Path("id") id:Int): Response<Boolean>
 
     @POST("api/posts")
     suspend fun createPost(@Body post:PostCreateDto): Response<Post>

@@ -23,14 +23,13 @@ class postsDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(PostsDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this)[PostsDetailViewModel::class.java]
         var fragmentView = inflater.inflate(R.layout.posts_detail_fragment, container, false)
 
         MainActivity.setLoadingStatus(viewModel, viewLifecycleOwner)
         MainActivity.setErrorStatus(viewModel, viewLifecycleOwner)
 
         viewModel.getPost(args.postId)
-
         viewModel.post.observe(viewLifecycleOwner) {
             if (it == null) return@observe
             txt_detail_Title.text = it.Title

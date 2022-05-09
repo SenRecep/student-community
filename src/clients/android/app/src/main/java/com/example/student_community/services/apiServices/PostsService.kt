@@ -34,6 +34,16 @@ class PostsService {
                 return HelperService.handleException(ex);
             }
         }
+        suspend fun getCheckOwner(id: Int):ApiResponse<Boolean> {
+            try {
+                var response = retrofitService.getCheckOwner(id);
+                if (!response.isSuccessful) return HelperService.handleApiError(response);
+                var isOwner = response.body()!!;
+                return ApiResponse(true, isOwner);
+            } catch (ex: Exception) {
+                return HelperService.handleException(ex);
+            }
+        }
 
         suspend fun createPost(createDto: PostCreateDto):ApiResponse<Post> {
             try {
