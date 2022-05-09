@@ -10,11 +10,14 @@ import {
   Post,
   Put,
   Query,
+  Req,
   UseFilters,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { HttpExceptionFilter } from 'src/filters/HttpException.filter';
+import { UserListDto } from 'src/modules/users/dto/UserList.dto';
 import { PostCreateDto } from '../../dto/PostCreate.dto';
 import { PostUpdateDto } from '../../dto/PostUpdate.dto';
 import { PostsService } from '../../services/posts/posts.service';
@@ -31,11 +34,16 @@ export class PostsController {
   }
   @Get('pager')
   async getAllPager(@Query() { take, skip }) {
-    const data = await this.postsService.getAllPager(take, skip);
-    console.log('take: ', take);
-    console.log('skip: ', skip);
-    console.log('data count: ', data.length);
-    return data;
+    return await this.postsService.getAllPager(take, skip);
+  }
+  @Get('/checkowner/:postId')
+  async checkOwner(
+    @Param('postId', ParseIntPipe) postId: number,
+    @Req() req: Request,
+  ) {
+    const found = await this.postsService.getByIdAsync(postId);
+    const user = new UserListDto(req.user);
+    return found?.userId === user.id;
   }
 
   @Get(':id')

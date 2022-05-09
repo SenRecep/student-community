@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 import { Address } from './Address.entity';
 import { EntityBase } from './EntityBase.entity';
+import { User } from './User.entity';
 
 @Entity({ name: 'posts' })
 export class Post extends EntityBase {
@@ -8,6 +9,11 @@ export class Post extends EntityBase {
   title: string;
   @Column({ name: 'content', nullable: false, default: '' })
   content: string;
+  @ManyToOne(() => User)
+  @JoinColumn()
+  user: User;
+  @Column({ name: 'userId', nullable: false })
+  userId: number;
   @OneToOne(() => Address)
   @JoinColumn()
   address: Address;

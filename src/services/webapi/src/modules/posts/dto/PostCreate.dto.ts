@@ -2,6 +2,7 @@ import { Type } from 'class-transformer';
 import {
   IsNotEmpty,
   IsNotEmptyObject,
+  IsNumber,
   IsString,
   MinLength,
   ValidateNested,
@@ -9,6 +10,9 @@ import {
 import { AddressCreateDto } from './AddressCreate.dto';
 
 export class PostCreateDto {
+  @IsNotEmpty()
+  @IsNumber()
+  userId: number;
   @IsNotEmpty()
   @IsString()
   @MinLength(3)

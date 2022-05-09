@@ -9,6 +9,7 @@ import com.example.student_community.models.api.ApiResponse
 import com.example.student_community.models.user.JwtToken
 import com.google.gson.Gson
 import retrofit2.Response
+import java.util.*
 
 class HelperService {
     companion object {
@@ -19,6 +20,15 @@ class HelperService {
             editor.putString("token", Gson().toJson(jwtToken));
             editor.apply();
         }
+
+        fun removeTokenSharedPreference() {
+            var preference =
+                GlobalApp.getAppContext().getSharedPreferences("api_token", Context.MODE_PRIVATE);
+            var editor = preference.edit();
+            editor.remove("token");
+            editor.apply();
+        }
+
 
         fun <T1, T2> handleApiError(response: Response<T1>): ApiResponse<T2> {
             var apiError: ApiError? = null;
@@ -31,10 +41,10 @@ class HelperService {
 
         fun <T> handleException(ex: Exception): ApiResponse<T> {
             val resources = GlobalApp.getAppContext().resources;
-            var errorMessage: ArrayList<String> = if (ex is OfflineException)
-                arrayListOf(resources.getString(R.string.ex_offline_exception));
+            var errorMessage: String = if (ex is OfflineException)
+                resources.getString(R.string.ex_offline_exception)
             else
-                arrayListOf(resources.getString(R.string.ex_common_error));
+                resources.getString(R.string.ex_common_error)
             var error =
                 ApiError(StatusCode = 500, Message = errorMessage, IsShow = true);
             return ApiResponse(false, error = error);
@@ -43,9 +53,8 @@ class HelperService {
         fun showErrorMessageByToast(apiError: ApiError?) {
             if (apiError == null) return;
             var errorBuilder = StringBuilder()
-            if (apiError.IsShow != null && apiError.IsShow!! && apiError.Message != null)
-                for (error in apiError.Message!!)
-                    errorBuilder.append("$error\n")
+            if (apiError.Message != null)
+                errorBuilder.append("${apiError.Message}\n")
             if (apiError.Error != null)
                 errorBuilder.append("${apiError.Error!!}\n")
 

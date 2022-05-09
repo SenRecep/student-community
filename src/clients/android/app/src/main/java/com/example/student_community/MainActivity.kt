@@ -1,8 +1,11 @@
 package com.example.student_community
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -14,6 +17,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import com.example.student_community.databinding.ActivityMainBinding
+import com.example.student_community.ui.auth.AuthActivity
+import com.example.student_community.utility.GlobalApp
 import com.example.student_community.utility.HelperService
 import com.example.student_community.utility.IViewModelState
 import com.example.student_community.utility.LoadingState
@@ -53,28 +58,44 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        binding.navView.menu.findItem(R.id.menu_logout).setOnMenuItemClickListener {
+            HelperService.removeTokenSharedPreference()
+            val intent= Intent(GlobalApp.getAppContext(),AuthActivity::class.java)
+            startActivity(intent)
+            finish()
+            true
+        }
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.postsListFragmentNav
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_info -> {
+                Toast.makeText(GlobalApp.getAppContext(), "Recep Şen\nHikmet Gezmen\nAli Eren Eriş", Toast.LENGTH_LONG)
+                    .show()
+                true
+            }
+            else-> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

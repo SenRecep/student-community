@@ -52,7 +52,6 @@ export class PostsService {
     if (!found) throw new NotFoundException('Post not found');
     for (const key in postUpdateDto) {
       if (
-        key != 'id' &&
         Object.prototype.hasOwnProperty.call(found, key) &&
         postUpdateDto[key] &&
         typeof postUpdateDto[key] !== 'object'
@@ -63,7 +62,6 @@ export class PostsService {
     if (postUpdateDto.address) {
       for (const key in postUpdateDto.address) {
         if (
-          key != 'id' &&
           Object.prototype.hasOwnProperty.call(found.address, key) &&
           postUpdateDto.address[key]
         ) {

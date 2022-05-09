@@ -1,15 +1,14 @@
 <resources>
-    <string name="app_name">student-community</string>
+    <string name="app_name">Student Community</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Student Community</string>
+    <string name="nav_header_subtitle">Virtual University Community</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_info">Info</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_logout">Logout</string>
 
     <string name="ex_offline_exception">İnternet bağlantınızı kontrol ediniz</string>
     <string name="ex_common_error">Bir sorun meydana geldi lütfen daha sonra tekrar deneyiniz</string>

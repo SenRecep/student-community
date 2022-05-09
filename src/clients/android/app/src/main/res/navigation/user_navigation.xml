@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_navigation"
+    app:startDestination="@id/postsListFragmentNav">
+
+    <fragment
+        android:id="@+id/postsListFragmentNav"
+        android:name="com.example.student_community.ui.posts.postsList.postsListFragment"
+        android:label="Posts"
+        tools:layout="@layout/posts_list_fragment">
+        <action
+            android:id="@+id/action_postsListFragment_to_postsAddFragment"
+            app:destination="@id/postsAddFragmentNav" />
+        <action
+            android:id="@+id/action_postsListFragment_to_postsDetailFragment"
+            app:destination="@id/postsDetailFragmentNav" />
+    </fragment>
+    <fragment
+        android:id="@+id/postsAddFragmentNav"
+        android:name="com.example.student_community.ui.posts.postsAdd.postsAddFragment"
+        android:label="Posts Create"
+        tools:layout="@layout/posts_add_fragment" />
+    <fragment
+        android:id="@+id/postsDetailFragmentNav"
+        android:name="com.example.student_community.ui.posts.postsDetail.postsDetailFragment"
+        android:label="Post Detail"
+        tools:layout="@layout/posts_detail_fragment">
+        <action
+            android:id="@+id/action_postsDetailFragment_to_postsUpdateFragment"
+            app:destination="@id/postsUpdateFragmentNav" />
+        <argument
+            android:name="post_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/postsUpdateFragmentNav"
+        android:name="com.example.student_community.ui.posts.postsUpdate.postsUpdateFragment"
+        android:label="Post Update"
+        tools:layout="@layout/posts_update_fragment" />
+</navigation>

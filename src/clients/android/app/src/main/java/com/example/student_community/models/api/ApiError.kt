@@ -8,7 +8,7 @@ import kotlin.collections.ArrayList
 val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
 data class ApiError(
     @SerializedName("statusCode") var StatusCode: Number?=500,
-    @SerializedName("message") var Message:ArrayList<String>?=null,
+    @SerializedName("message") var Message:Any?=null,
     @SerializedName("error") var Error:String?=null,
     @SerializedName("isShow") var IsShow:Boolean?=false,
     @SerializedName("path") var Path:String?=null,

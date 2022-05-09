@@ -11,48 +11,75 @@ import com.example.student_community.ui.holders.PostHolder
 
 class PostListAdapter(var posts: ArrayList<Post>, private val itemClick: (Post) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val VIEW_TYPE_Loading = 0
-    private val VIEW_TYPE_Normal = 1
+    private val VIEW_TYPE_LOADING = 0
+    private val VIEW_TYPE_NORMAL = 1
+
 
     override fun getItemViewType(position: Int): Int {
-        if (posts[position].Id == 0)
-            return VIEW_TYPE_Loading
 
-        return VIEW_TYPE_Normal
+        return if (posts[position].Id == 0) {
+            VIEW_TYPE_LOADING
+        } else {
+            VIEW_TYPE_NORMAL
+        }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         var inflater = LayoutInflater.from(parent.context)
-        if (viewType == VIEW_TYPE_Loading)
-            return LoadingHolder(inflater.inflate(R.layout.loading_item, parent, false))
-        return  PostHolder(inflater.inflate(R.layout.post_item, parent, false))
+        if (viewType == VIEW_TYPE_LOADING) {
+            return LoadingHolder(
+                inflater.inflate(
+                    R.layout.loading_item,
+                    parent,
+                    false
+                )
+            )
+        } else {
+            return PostHolder(
+                inflater.inflate(
+                    R.layout.post_item,
+                    parent,
+                    false
+                )
+            )
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val post= posts[position]
+        val post = posts[position]
         if (holder is PostHolder) {
-            holder.txtTitle.text=post.Title
-            holder.txtContent.text=post.Content
-            holder.txtAddress.text=post.Address.Address
+            holder.txtTitle.text = post.Title
+            holder.txtContent.text = post.Content
+            holder.txtAddress.text = post.Address.Address
+            holder.itemView.setOnClickListener{
+                itemClick(post)
+            }
         }
     }
 
     override fun getItemCount(): Int {
-       return  posts.size
+        return posts.size
     }
 
-    fun addLoading(){
-        var loadingPost=Post.createEmptyPost()
+
+    fun addLoading() {
+        var loadingPost = Post.createEmptyPost()
         posts.add(loadingPost)
         notifyDataSetChanged()
+
+
     }
-    fun  removeLoading(){
-        posts.removeAt(posts.size-1)
+
+    fun removeLoading() {
+        var position = posts.size - 1
+        posts.removeAt(position)
         notifyDataSetChanged()
     }
 
-    fun addPosts(products:ArrayList<Post>) {
-        this.posts.addAll(products)
+
+    fun addPosts(newProducts: ArrayList<Post>) {
+        posts.addAll(newProducts)
         notifyDataSetChanged()
     }
 }

@@ -10,6 +10,7 @@ data class Post(
     @SerializedName("isDeleted") val IsDeleted: Boolean,
     @SerializedName("title") val Title: String,
     @SerializedName("content") val Content: String,
+    @SerializedName("userId") val UserId: Number,
     @SerializedName("address") val Address: Address,
 ) {
     companion object {
@@ -19,6 +20,7 @@ data class Post(
                 CreatedTime = Date(),
                 UpdatedTime = Date(),
                 IsDeleted = false,
+                UserId = 0,
                 Title = "",
                 Content = "",
                 Address = Address.createEmptyAddress()
