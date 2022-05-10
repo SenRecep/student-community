@@ -31,8 +31,8 @@
             android:id="@+id/action_postsDetailFragment_to_postsUpdateFragment"
             app:destination="@id/postsUpdateFragmentNav" />
         <argument
-            android:name="post_id"
-            app:argType="integer" />
+            android:name="post_list_dto"
+            app:argType="com.example.student_community.models.webapi.dto.PostListDto" />
     </fragment>
     <fragment
         android:id="@+id/postsUpdateFragmentNav"

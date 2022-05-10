@@ -31,8 +31,11 @@ class postsDetailFragment : Fragment() {
         MainActivity.setLoadingStatus(viewModel, viewLifecycleOwner)
         MainActivity.setErrorStatus(viewModel, viewLifecycleOwner)
 
-        viewModel.getPost(args.postId)
-        viewModel.checkOwner(args.postId)
+        viewModel.getPost(args.postListDto.Id.toInt())
+        viewModel.checkOwner(args.postListDto.Id.toInt())
+
+        fragmentView.txt_date.text=args.postListDto.UpdatedTimeText
+        fragmentView.txt_distance.text=args.postListDto.Address.DistanceText
 
         viewModel.isOwner.observe(viewLifecycleOwner) {
             if (it) {
@@ -48,7 +51,7 @@ class postsDetailFragment : Fragment() {
         }
 
         fragmentView.btn_detail_delete.setOnClickListener() {
-            viewModel.deletePost(args.postId).observe(viewLifecycleOwner) {
+            viewModel.deletePost(args.postListDto.Id.toInt()).observe(viewLifecycleOwner) {
                 if (it) {
                     Toast.makeText(context, "Post deleted", Toast.LENGTH_SHORT).show()
                     fragmentView.findNavController().navigate(R.id.postsListFragmentNav)

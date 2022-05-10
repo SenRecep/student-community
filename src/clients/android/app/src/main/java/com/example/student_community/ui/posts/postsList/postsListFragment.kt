@@ -92,7 +92,7 @@ class postsListFragment : Fragment() {
                         postListRecyclerAdapter = PostListAdapter(posts) { post ->
                             var action =
                                 postsListFragmentDirections.actionPostsListFragmentToPostsDetailFragment(
-                                    post.Id.toInt()
+                                    post
                                 )
 
                             var navHostFragment =

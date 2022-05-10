@@ -91,7 +91,7 @@
                 android:id="@+id/signup_button_kayit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kayıt Ol" />
+                android:text="SIGN UP" />
 
 
         </LinearLayout>

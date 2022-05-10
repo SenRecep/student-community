@@ -43,8 +43,8 @@ class SignInFragment : Fragment() {
 
         viewModel.loadingState.observe(viewLifecycleOwner) {
             when (it) {
-                LoadingState.Loading -> fragmentView.signin_button_kayit.text = "Loading"
-                LoadingState.Loaded -> fragmentView.signin_button_kayit.text = "Kayıt Ol"
+                LoadingState.Loading -> fragmentView.signin_button_kayit.text = "LOADING"
+                LoadingState.Loaded -> fragmentView.signin_button_kayit.text = "SIGN IN"
             }
         }
 

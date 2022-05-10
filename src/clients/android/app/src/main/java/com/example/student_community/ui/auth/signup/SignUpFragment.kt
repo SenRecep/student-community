@@ -41,8 +41,8 @@ class SignUpFragment : Fragment() {
 
         viewModel.loadingState.observe(viewLifecycleOwner) {
             when (it) {
-                LoadingState.Loading -> fragmentView.signup_button_kayit.text = "Loading"
-                LoadingState.Loaded -> fragmentView.signup_button_kayit.text = "Kayıt Ol"
+                LoadingState.Loading -> fragmentView.signup_button_kayit.text = "LOADING"
+                LoadingState.Loaded -> fragmentView.signup_button_kayit.text = "SIGN UP"
             }
         }
 

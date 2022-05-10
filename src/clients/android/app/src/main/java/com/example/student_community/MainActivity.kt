@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_info -> {
-                Toast.makeText(GlobalApp.getAppContext(), "Recep Şen\nHikmet Gezmen\nAli Eren Eriş", Toast.LENGTH_LONG)
+                Toast.makeText(GlobalApp.getAppContext(), "Recep Şen (192804015)\nHikmet Gezmen (192804008)\nAli Eren Eriş (192802001)", Toast.LENGTH_LONG)
                     .show()
                 true
             }
