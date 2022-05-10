@@ -1,5 +1,6 @@
 package com.example.student_community.ui.posts.postsDetail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,7 +21,7 @@ class PostsDetailViewModel : ViewModel(), IViewModelState {
         loadingState.value = LoadingState.Loading
         viewModelScope.launch {
             var response = PostsService.getPostById(post_id)
-            if (response.isSuccusful)
+            if (response.isSuccessful)
                 post.value = response.data!!
             else
                 errorState.value = response.error
@@ -31,8 +32,23 @@ class PostsDetailViewModel : ViewModel(), IViewModelState {
     fun checkOwner(postId: Int) {
         viewModelScope.launch {
             var response = PostsService.getCheckOwner(postId)
-            if (response.isSuccusful)
+            if (response.isSuccessful)
                 isOwner.value = response.data!!
         }
     }
+
+    fun deletePost(postId: Int):LiveData<Boolean>  {
+        loadingState.value = LoadingState.Loading
+        var status=MutableLiveData<Boolean>()
+        viewModelScope.launch {
+            var response = PostsService.deletePost(postId)
+            if (response.isSuccessful)
+                status.value=true
+            else
+                errorState.value = response.error
+            loadingState.value = LoadingState.Loaded
+        }
+        return  status
+    }
+
 }

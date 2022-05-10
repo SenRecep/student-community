@@ -11,9 +11,6 @@ import { AddressCreateDto } from './AddressCreate.dto';
 
 export class PostCreateDto {
   @IsNotEmpty()
-  @IsNumber()
-  userId: number;
-  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   title: string;
@@ -25,4 +22,5 @@ export class PostCreateDto {
   @ValidateNested()
   @Type(() => AddressCreateDto)
   address: AddressCreateDto;
+  userId?: number = null;
 }

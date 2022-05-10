@@ -34,6 +34,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/signup_text_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Email">
@@ -46,6 +47,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/signup_text_first_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Ad">
@@ -58,6 +60,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/signup_text_last_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Soyad">
@@ -70,6 +73,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/signup_text_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Parola">

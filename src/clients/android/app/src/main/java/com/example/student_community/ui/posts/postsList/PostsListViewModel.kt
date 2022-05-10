@@ -20,7 +20,7 @@ class PostsListViewModel : ViewModel(), IViewModelState {
         loadingState.value = LoadingState.Loading
         viewModelScope.launch {
             var response= PostsService.getPosts(pager)
-            if (!response.isSuccusful)
+            if (!response.isSuccessful)
                 errorState.value= response.error
             else
                 posts.value= response.data!!

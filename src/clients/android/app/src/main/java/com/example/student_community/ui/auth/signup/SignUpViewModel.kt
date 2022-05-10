@@ -21,9 +21,9 @@ class SignUpViewModel : ViewModel(), IViewModelState {
 
         viewModelScope.launch {
             var res = AuthService.signUp(userSignUp)
-            status.value=res.isSuccusful
+            status.value=res.isSuccessful
             loadingState.value=LoadingState.Loaded
-            if (!res.isSuccusful) errorState.value=res.error
+            if (!res.isSuccessful) errorState.value=res.error
         }
         return status
     }

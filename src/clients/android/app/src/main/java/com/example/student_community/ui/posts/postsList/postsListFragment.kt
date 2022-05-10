@@ -29,13 +29,15 @@ class postsListFragment : Fragment() {
     var isLastPage = false
 
     private lateinit var viewModel: PostsListViewModel
+    private  lateinit var fragmentView: View
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this).get(PostsListViewModel::class.java)
-        var fragmentView = inflater.inflate(R.layout.posts_list_fragment, container, false)
+        fragmentView = inflater.inflate(R.layout.posts_list_fragment, container, false)
 
         MainActivity.setLoadingStatus(viewModel, viewLifecycleOwner)
         MainActivity.setErrorStatus(viewModel, viewLifecycleOwner)
@@ -49,11 +51,6 @@ class postsListFragment : Fragment() {
 
         fragmentView.rv.layoutManager = linearLayoutManager
 
-        if (page == 0) {
-            viewModel.getPosts(Pager(page))
-        } else {
-            fragmentView.rv.adapter = postListRecyclerAdapter
-        }
 
 
         viewModel.posts.observe(viewLifecycleOwner) {
@@ -115,5 +112,18 @@ class postsListFragment : Fragment() {
         })
 
         return fragmentView
+    }
+
+    override fun onResume() {
+        page=0
+        isLoading=false
+        isLastPage=false
+        if (page == 0) {
+            viewModel.getPosts(Pager(page))
+        } else {
+            fragmentView.rv.adapter = postListRecyclerAdapter
+        }
+
+        super.onResume()
     }
 }

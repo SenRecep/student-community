@@ -20,8 +20,8 @@ class SignInViewModel : ViewModel(), IViewModelState {
         var status = MutableLiveData<Boolean>()
         viewModelScope.launch {
             var apiResponse = AuthService.signIn(signIn)
-            status.value=apiResponse.isSuccusful
-            if (!apiResponse.isSuccusful)
+            status.value=apiResponse.isSuccessful
+            if (!apiResponse.isSuccessful)
                 errorState.value=apiResponse.error
             loadingState.value=LoadingState.Loaded
         }

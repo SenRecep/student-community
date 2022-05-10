@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.navArgs
 import com.example.student_community.R
+import com.example.student_community.utility.GlobalApp
 
 class postsUpdateFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = postsUpdateFragment()
-    }
+    private val args: postsUpdateFragmentArgs by navArgs()
 
     private lateinit var viewModel: PostsUpdateViewModel
 
@@ -20,13 +21,11 @@ class postsUpdateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.posts_update_fragment, container, false)
+        viewModel = ViewModelProvider(this).get(PostsUpdateViewModel::class.java)
+        var fragmentView = inflater.inflate(R.layout.posts_update_fragment, container, false)
+        Toast.makeText(GlobalApp.getAppContext(), args.post.Title, Toast.LENGTH_SHORT).show()
+        return fragmentView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PostsUpdateViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

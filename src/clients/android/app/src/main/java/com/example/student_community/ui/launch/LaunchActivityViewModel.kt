@@ -19,9 +19,9 @@ class LaunchActivityViewModel : ViewModel(), IViewModelState {
         var status = MutableLiveData<Boolean>()
         viewModelScope.launch {
             var res= TokenService.checkToken()
-            status.value=res.isSuccusful
+            status.value=res.isSuccessful
             loadingState.value=LoadingState.Loaded
-            if (!res.isSuccusful) errorState.value=res.error
+            if (!res.isSuccessful) errorState.value=res.error
         }
         return status
     }

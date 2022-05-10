@@ -1,8 +1,11 @@
 package com.example.student_community.models.webapi
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class Post(
     @SerializedName("id") val Id: Number,
     @SerializedName("createdTime") val CreatedTime: Date,
@@ -12,7 +15,7 @@ data class Post(
     @SerializedName("content") val Content: String,
     @SerializedName("userId") val UserId: Number,
     @SerializedName("address") val Address: Address,
-) {
+): Parcelable {
     companion object {
         fun createEmptyPost(): Post {
             return Post(

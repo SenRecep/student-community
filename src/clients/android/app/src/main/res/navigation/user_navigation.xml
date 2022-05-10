@@ -38,5 +38,9 @@
         android:id="@+id/postsUpdateFragmentNav"
         android:name="com.example.student_community.ui.posts.postsUpdate.postsUpdateFragment"
         android:label="Post Update"
-        tools:layout="@layout/posts_update_fragment" />
+        tools:layout="@layout/posts_update_fragment" >
+        <argument
+            android:name="post"
+            app:argType="com.example.student_community.models.webapi.Post" />
+    </fragment>
 </navigation>

@@ -68,7 +68,8 @@ export class PostsController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  createUser(@Body() postCreateDto: PostCreateDto) {
+  createUser(@Body() postCreateDto: PostCreateDto, @Req() req: Request) {
+    postCreateDto.userId = req.user['id'];
     return this.postsService.createAsync(postCreateDto);
   }
 }

@@ -19,9 +19,9 @@ class ApiClient {
             var clientBuilder = OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
                 .addInterceptor(NetworkInterceptor())
-                .addInterceptor(TokenInterceptor());
+
             if (existInterceptor) {
-                //interceptor eklenecek
+                clientBuilder.addInterceptor(TokenInterceptor())
             }
             val gson = GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
