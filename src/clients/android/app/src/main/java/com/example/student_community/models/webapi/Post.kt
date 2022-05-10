@@ -1,6 +1,8 @@
 package com.example.student_community.models.webapi
 
 import android.os.Parcelable
+import com.example.student_community.models.webapi.dto.PostListDto
+import com.example.student_community.services.LocationData
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -15,7 +17,7 @@ data class Post(
     @SerializedName("content") val Content: String,
     @SerializedName("userId") val UserId: Number,
     @SerializedName("address") val Address: Address,
-): Parcelable {
+) : Parcelable {
     companion object {
         fun createEmptyPost(): Post {
             return Post(
@@ -29,6 +31,17 @@ data class Post(
                 Address = Address.createEmptyAddress()
             )
         }
+    }
+
+    fun parseToListDto(distanceText: String = "0m", distance: Float = 0f,dateText:String="to day"): PostListDto {
+        return PostListDto(
+            Id = Id,
+            Title = Title,
+            Content = Content,
+            UpdatedTime = UpdatedTime,
+            Address = Address.parseToListDto(distanceText, distance),
+            UpdatedTimeText = dateText
+        )
     }
 }
 

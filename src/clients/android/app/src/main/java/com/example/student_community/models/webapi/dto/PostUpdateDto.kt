@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 data class PostUpdateDto(
     @SerializedName("title") val Title: String?=null,
     @SerializedName("content") val Content: String?=null,
-    @SerializedName("address") val Address: AddressUpdateDto?=null,
+    @SerializedName("address") var Address: AddressUpdateDto?=null,
 )

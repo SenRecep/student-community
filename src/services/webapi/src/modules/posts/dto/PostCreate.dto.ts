@@ -2,7 +2,6 @@ import { Type } from 'class-transformer';
 import {
   IsNotEmpty,
   IsNotEmptyObject,
-  IsNumber,
   IsString,
   MinLength,
   ValidateNested,

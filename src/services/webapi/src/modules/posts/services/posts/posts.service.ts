@@ -34,6 +34,7 @@ export class PostsService {
       skip,
       relations: ['address'],
       where: { isDeleted: false },
+      order: { updatedTime: 'DESC' },
     });
     return data;
   }

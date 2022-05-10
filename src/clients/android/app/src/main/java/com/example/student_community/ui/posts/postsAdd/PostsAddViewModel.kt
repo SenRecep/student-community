@@ -30,7 +30,7 @@ class PostsAddViewModel : ViewModel(), IViewModelState {
                     .show()
             } else {
                 locationData.value = LocationData(
-                    location.latitude, location.longitude, locationService.getCompleteAddressString(
+                    location.latitude.toFloat(), location.longitude.toFloat(), locationService.getCompleteAddressString(
                         location.latitude,
                         location.longitude,
                         GlobalApp.getAppContext()
@@ -47,7 +47,7 @@ class PostsAddViewModel : ViewModel(), IViewModelState {
         }
     }
 
-    suspend fun createPost(postCreateDto: PostCreateDto):LiveData<Boolean>{
+    fun createPost(postCreateDto: PostCreateDto):LiveData<Boolean>{
         loadingState.value = LoadingState.Loading
         val result = MutableLiveData<Boolean>()
         viewModelScope.launch {

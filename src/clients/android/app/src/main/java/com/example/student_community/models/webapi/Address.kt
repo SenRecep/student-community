@@ -1,6 +1,7 @@
 package com.example.student_community.models.webapi
 
 import android.os.Parcelable
+import com.example.student_community.models.webapi.dto.AddressListDto
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -27,5 +28,12 @@ data class Address(
                 Address = ""
             )
         }
+    }
+    fun parseToListDto(distanceText:String,distance: Float=0f): AddressListDto {
+        return AddressListDto(
+            Address = this.Address,
+            DistanceText = distanceText,
+            Distance = distance,
+        )
     }
 }
